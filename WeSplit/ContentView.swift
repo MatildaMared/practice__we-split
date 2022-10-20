@@ -14,6 +14,7 @@ struct ContentView: View {
     @FocusState private var amountIsFocused: Bool
     
     let tipPercentages = [0, 10, 15, 20, 25]
+    let currencyCode = Locale.current.currency?.identifier ?? "SEK"
     
     var grandTotal: Double {
         let tipSelection = Double(tipPercentage)
@@ -33,7 +34,7 @@ struct ContentView: View {
             Form {
                 Section {
                     TextField("Amount", value: $checkAmount, format:
-                            .currency(code: Locale.current.currency?.identifier ?? "SEK"))
+                            .currency(code: currencyCode))
                     .keyboardType(.decimalPad)
                     .focused($amountIsFocused)
                     
@@ -56,7 +57,7 @@ struct ContentView: View {
                 }
                 
                 Section {
-                    Text(grandTotal, format: .currency(code: Locale.current.currency?.identifier ?? "SEK"))
+                    Text(grandTotal, format: .currency(code: currencyCode))
                 } header: {
                     Text("Total including tip")
                 }
